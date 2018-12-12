@@ -1,0 +1,8 @@
+server {
+    listen 80;
+    server_name 120.77.40.5:80;
+    root /var/jenkins_home/workspace/AgoraKiosk/client/dist;
+    index index.html index.html
+    location / {
+    }
+}
