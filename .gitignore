@@ -1,2 +1,2 @@
-server
-client/src/config/ms-graph.js
+server/settings.py
+server/__pycache__

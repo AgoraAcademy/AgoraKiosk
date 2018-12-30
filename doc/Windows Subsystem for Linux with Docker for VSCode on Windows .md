@@ -1,6 +1,8 @@
 # Windows Subsystem for Linux with Docker for VSCode on Windows
 Windows 10中的WSL(Windows Subsystem for Linux)提供了在Windows主机上使用Ubuntu等子系统的功能，可以解决各类相关问题，更加可以结合到VSCode中提升开发体验。
 
+然而在VSCode on Windows中，其自带的解释器仍然需要使用Windows版本，无法使用同一个环境并提供相应的语法检查，并不利于开发时使用。
+
 ## 安装WSL
 1. 在`Turn Windows Features on or Off`中启用`Windows Subsystem for Linux`
 2. 在`Microsoft Store`中安装`Ubuntu`并完成安装向导
