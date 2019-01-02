@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             additionalBuildArgs '--no-cache'
-            args 'p 80:80 --security-opt apparmor=unconfined'
+            args 'p 8001:80 --security-opt apparmor=unconfined'
         }
     }
     stages {
@@ -20,8 +20,11 @@ pipeline {
             }
         }
         stage('Deliver'){
-            sh 'service nginx start'
-            input message: 'Finished using the website? Click "proceed" to continue)'
+            steps {
+                sh 'service nginx start'
+                input message: 'Finished using the website? Click "proceed" to continue)'
+            }
+            
         }
     }
     post {
