@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             additionalBuildArgs '--no-cache'
-            args 'p 8001:80 --security-opt apparmor=unconfined'
+            args '-p 8001:80 --security-opt apparmor=unconfined'
         }
     }
     stages {
