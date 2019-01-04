@@ -4,6 +4,7 @@ pipeline {
             filename 'Dockerfile'
             additionalBuildArgs '--no-cache'
             args '-p 8001:80 --security-opt apparmor=unconfined'
+            customWorkspace '/var/jenkins_home/workspace/AgoraKiosk/client'
         }
     }
     stages {
