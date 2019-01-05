@@ -9,13 +9,14 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                sh 'cd ./client'
+                sh 'cd /var/jenkins_home/workspace/AgoraKiosk/client'
                 sh 'npm cache clean --force'
                 sh 'npm install'
             }
         }
         stage('Build') {
             steps {
+                sh 'cd /var/jenkins_home/workspace/AgoraKiosk/client'
                 sh 'npm run build'
             }
         }
