@@ -8,15 +8,15 @@ pipeline {
     }
     stages {
         stage('Install') {
+            customWorkspace './client'
             steps {
-                sh 'cd /var/jenkins_home/workspace/AgoraKiosk/client'
                 sh 'npm cache clean --force'
                 sh 'npm install'
             }
         }
         stage('Build') {
+            customWorkspace './client'
             steps {
-                sh 'cd /var/jenkins_home/workspace/AgoraKiosk/client'
                 sh 'npm run build'
             }
         }
