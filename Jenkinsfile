@@ -26,6 +26,7 @@ pipeline {
         }
         stage('Deliver'){
             steps {
+                input message: 'Start nginx? Click "proceed" to continue)'
                 sh 'service nginx start'
                 input message: 'Finished using the website? Click "proceed" to continue)'
             }
