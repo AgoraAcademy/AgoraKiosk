@@ -1,3 +1,4 @@
 server/settings.py
 server/__pycache__
 server
+client/package-lock.json
