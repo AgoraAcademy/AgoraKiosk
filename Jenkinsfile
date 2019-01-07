@@ -11,6 +11,7 @@ pipeline {
             steps {
                 dir ('/var/jenkins_home/workspace/AgoraKiosk/client') {
                     sh 'npm cache clean --force'
+                    sh 'npm install -g typescript'
                     sh 'npm install'
                 }
                 
