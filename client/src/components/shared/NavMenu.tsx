@@ -7,6 +7,7 @@ import './NavMenu.less'
 
 export interface INavMenuProps {
     dispatch: any
+    expandSider: () => void
 };
 
 class NavMenu extends React.Component<INavMenuProps> {
@@ -25,7 +26,7 @@ class NavMenu extends React.Component<INavMenuProps> {
         };
         const navigationTopNodes = [
             <SplitViewCommand label="行政日历" key={Math.random()} icon="Calendar" onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"admin"})}/>,
-            <SplitViewCommand label="预约日历" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"16f_lobby"})}/>,
+            <SplitViewCommand label="预约日历" icon="Home" key={Math.random()} onClick={this.props.expandSider}/>,
         ];
 
         const navigationBottomNode = [

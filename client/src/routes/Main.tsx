@@ -12,12 +12,21 @@ export interface IMainProps {
     newslist?: Array<{ title: string, content: 'string' }>;
 };
 
+export interface IMainState {
+    siderExpanded: boolean
+}
+
 class Main extends React.Component<IMainProps> {
+    public state: IMainState = {
+        siderExpanded: false
+    }
     public render(): JSX.Element {
         return (
             <Layout>
-                <NavMenu/>
-                <Sider width={240} className={"global-sider"}>
+                <NavMenu 
+                    expandSider = {() => this.setState({siderExpanded: !this.state.siderExpanded})}
+                />
+                <Sider width={this.state.siderExpanded? 240: 0 } className={"global-sider"}>
                     <Switch>
                         <Route exact path="/" component={ReservationCalendarMenu} />
                     </Switch>

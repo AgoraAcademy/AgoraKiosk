@@ -26,7 +26,7 @@ class ReservationCalendarMenu extends React.Component<IReservationMenuProps> {
     public context: { theme: ReactUWP.ThemeType };
 
     public listSource: TreeItem[] = [{
-        title: "预约日历",
+        title: "NEO 16楼学习中心",
         children: [{
             title: "大厅",
             onClick: () => this.props.dispatch(
