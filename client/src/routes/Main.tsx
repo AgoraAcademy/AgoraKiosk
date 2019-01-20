@@ -6,6 +6,7 @@ import './Main.less'
 import Home from '../components/Content/Home'
 import Calendar from '../components/Content/Calendar';
 import ReservationCalendarMenu from '../components/Menu/ReservationCalendarMenu'
+import NoticeMD from '../components/Content/NoticeMD';
 const { Header, Footer, Sider, Content } = Layout;
 
 export interface IMainProps {
@@ -33,6 +34,7 @@ class Main extends React.Component<IMainProps> {
                 </Sider>
                 <Content>
                         <Switch>
+                            <Route path="/notice" component={NoticeMD} />
                             <Route exact path="/" component={Calendar}/>
                         </Switch>
                 </Content>
