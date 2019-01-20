@@ -25,12 +25,7 @@ class NavMenu extends React.Component<INavMenuProps> {
         };
         const navigationTopNodes = [
             <SplitViewCommand label="行政日历" key={Math.random()} icon="Calendar" onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"admin"})}/>,
-            <SplitViewCommand label="预约日历 - 大厅" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"16f_lobby"})}/>,
-            <SplitViewCommand label="预约日历 - 大教室（豆袋区）" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"16f_large"})}/>,
-            <SplitViewCommand label="预约日历 - 小教室" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"16f_small"})}/>,
-            <SplitViewCommand label="预约日历 - 操作台" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"16f_operation_desk"})}/>,
-            <SplitViewCommand label="预约日历 - 图书馆" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"library"})}/>,
-
+            <SplitViewCommand label="预约日历" icon="Home" key={Math.random()} onClick={() => dispatch({type:"main/setField", name:"calendarDisplayed", value:"16f_lobby"})}/>,
         ];
 
         const navigationBottomNode = [
@@ -51,6 +46,7 @@ class NavMenu extends React.Component<INavMenuProps> {
                 style={{height: '100vh'}}
             >
                 <NavigationView
+                    className="NavMenu"
                     style={{ ...baseStyle}}
                     pageTitle="安格学院"
                     displayMode="compact"
