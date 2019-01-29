@@ -1,8 +1,9 @@
-from exchangelib import Credentials, Account, Configuration, DELEGATE, IMPERSONATION, RoomList
+from exchangelib import Credentials, Account, Configuration, DELEGATE, RoomList
 from exchangelib.services import GetRooms
 from flask import Flask
 from flask import request
-from settings import config #此处设定文件不作上传
+from settings import config  # 此处设定文件不作上传
+import requests
 import json
 
 
@@ -11,32 +12,34 @@ credentials = Credentials(config["admin_email"], config["admin_password"])
 config = Configuration(server='outlook.office365.com', credentials=credentials)
 
 account = Account(
-    primary_smtp_address='admin@agoraacademy.onmicrosoft.com', 
-    credentials=credentials, 
+    primary_smtp_address='admin@agoraacademy.onmicrosoft.com',
+    credentials=credentials,
     autodiscover=False,
     config=config,
     access_type=DELEGATE
-    )
+)
 
 rooms = GetRooms(protocol=account.protocol).call(
-    roomlist=RoomList(email_address='NEO-CResourcesList@agoraacademy.onmicrosoft.com')
+    roomlist=RoomList(
+        email_address='NEO-CResourcesList@agoraacademy.onmicrosoft.com')
 )
 
 
 app = Flask(__name__)
 if __name__ == '__main__':
     app.run(
-		debug=True,
-		host='0.0.0.0'
-	)
+        debug=True,
+        host='0.0.0.0'
+    )
+
 
 @app.route('/')
-def hello_world():
-    res = {}
+def hello_world() -> str:
+    res: dict = {}
     for room in rooms:
         room_account = Account(
-            primary_smtp_address=room.email_address, 
-            credentials=credentials, 
+            primary_smtp_address=room.email_address,
+            credentials=credentials,
             config=config
         )
         res["%s" % room_account] = []
@@ -46,5 +49,21 @@ def hello_world():
                 "subject": item.subject,
                 "end": item.end
             })
-    
+
     return json.dumps(dict(res))
+
+
+@app.route('/getOpenID/', methods=['POST'])
+def getOpenID() -> str:
+    def post() -> str:
+        try:
+            RequestJson = json.dumps(request.json)
+        except Exception as e:
+            print(e)
+            return json.dumps({"code": "400"})
+        else:
+            return
+    if request.method == 'POST':
+            return post()
+    return
+    
