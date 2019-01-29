@@ -12,5 +12,6 @@
     "python.linting.mypyArgs": [
         "--ignore-missing-imports",
         "--disallow-untyped-defs"
-    ]
+    ],
+    "python.linting.flake8Args": ["--ignore=E501"]
 }

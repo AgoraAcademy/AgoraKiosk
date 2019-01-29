@@ -2,12 +2,14 @@ from exchangelib import Credentials, Account, Configuration, DELEGATE, RoomList
 from exchangelib.services import GetRooms
 from flask import Flask
 from flask import request
-from settings import config  # 此处设定文件不作上传
+from . import Kiosk_settings  # 此处设定文件不作上传
 import requests
 import json
 
 
-credentials = Credentials(config["admin_email"], config["admin_password"])
+credentials = Credentials(
+    Kiosk_settings.EWS_config["admin_email"], 
+    Kiosk_settings.EWS_config["admin_password"])
 
 config = Configuration(server='outlook.office365.com', credentials=credentials)
 
@@ -53,17 +55,35 @@ def hello_world() -> str:
     return json.dumps(dict(res))
 
 
-@app.route('/getOpenID/', methods=['POST'])
-def getOpenID() -> str:
+
+def getOpenID(code:str) -> str:
     def post() -> str:
         try:
-            RequestJson = json.dumps(request.json)
+            RequestURL: str = "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code" % (
+                Kiosk_settings.Weixin_config['wx_app_id'], 
+                Kiosk_settings.Weixin_config['wx_app_secret'], 
+                code
+            )
+            RequestToWeixin = requests.get(RequestURL)
+            return  RequestToWeixin.json()["openid"]
         except Exception as e:
             print(e)
-            return json.dumps({"code": "400"})
+            return json.dumps({
+                "code": "400",
+                "message": "unable to get OPENID"
+            })
         else:
-            return
+            return json.dumps({
+                "code": "500",
+                "message": "Internal Error"
+            })
     if request.method == 'POST':
             return post()
-    return
+    return json.dumps({
+            "code": "500",
+            "message": "Internal Error"
+    })
     
+@app.route('/test')
+def test() -> None:
+    print(request)
